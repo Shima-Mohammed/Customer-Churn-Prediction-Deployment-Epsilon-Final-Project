@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import csv
-import sys
 import joblib
 
 
