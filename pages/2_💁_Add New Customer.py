@@ -1,16 +1,24 @@
 
+
 import streamlit as st
 import pandas as pd
 import joblib
 
 
 #read model
-mypipeline= joblib.load("models/Classification_Model_Final.pkl")
+predict_status_pipline= joblib.load("models/Classification_Model_Final.pkl")
+predict_monthly_charge_pipline= joblib.load("models/Regression_Model_Final.pkl")
 
+def predict_monthly_charge(df):
+     df.drop(['MonthlyCharge'],inplace=True,axis=1)
+     result = predict_monthly_charge_pipline.predict(df)
+     st.markdown(f" <h6 style='text-align:center;margin-bottom:20px;background-color:rgb(135, 211, 124);color:white ;padding-top: 20px;border-radius: 30px'>The monthly charge will be {result} </h6> " , unsafe_allow_html=True)
+     return result
 
-
-def prediction(df):
-    result= mypipeline.predict(df)
+def prediction_status(df):
+    df['MonthlyCharge'] = predict_monthly_charge(df)
+    df = df.drop(['CustomerID'],axis=1)
+    result= predict_status_pipline.predict(df)
     if result[0] == 1 :
           st.markdown(" <h6 style='text-align:center;margin-bottom:20px;background-color:rgb(135, 211, 124);color:white ;padding-top: 20px;border-radius: 30px'>This customer will stay</h6> " , unsafe_allow_html=True)
     else :
@@ -81,13 +89,11 @@ with st.form("my_form"):
                 if validation_object[i] == '' or validation_object[i] ==  None  : 
                     st.markdown(f"<span style='margin-bottom:20px;color:red'>the {''.join(' ' + char if char.isupper() else char.strip() for char in i).strip()} should have a value </span> " , unsafe_allow_html=True)
                     st.session_state.disabled = False
-                    # st.info(st.session_state.disabled)
                     break 
             else: 
                 # call ML Model 
-                st.write('Thanks ^-^')
                 test_df = pd.DataFrame({k: [v] for k, v in validation_object.items()})
-                prediction(test_df)
+                prediction_status(test_df)
 
 
              
