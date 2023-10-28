@@ -22,7 +22,7 @@ def prediction_status(df):
     if result[0] == 1 :
           st.markdown(" <h6 style='text-align:center;margin-bottom:20px;background-color:rgb(135, 211, 124);color:white ;padding-top: 20px;border-radius: 30px'>This customer will stay</h6> " , unsafe_allow_html=True)
     else :
-          st.markdown(" <h6 style='text-align:center;margin-bottom:20px;background-color:rgb(214, 69, 65);color:white;padding-top: 20px;border-radius: 30px'>This customer may leave , kindly ةake him an offer</h6> " , unsafe_allow_html=True)
+          st.markdown(" <h6 style='text-align:center;margin-bottom:20px;background-color:rgb(214, 69, 65);color:white;padding-top: 20px;border-radius: 30px'>This customer may leave , kindly make him an offer</h6> " , unsafe_allow_html=True)
     return result[0]
 
 
@@ -37,7 +37,7 @@ with st.form("my_form"):
         NumberofDependents = st.radio("Number of Dependents",[0, 1,2,3],horizontal=True,index=None)
         NumberofReferrals = st.number_input('Number of Referrals', min_value=0, max_value=9,step=1)
         TenureinMonths = st.slider('Tenure in Months',1 , 72, 3)
-        Offer  = st.selectbox(label='Offer',options=('No Offer', 'Offer A', 'Offer B','Offer C','Offer D'),index=None,placeholder="Choose an offer") 
+        Offer  = st.selectbox(label='Offer',options=('No Offer', 'Offer A', 'Offer B','Offer C','Offer D','Offer E'),index=None,placeholder="Choose an offer") 
         PhoneService  = st.radio("Phone Service",['Yes', 'No'],horizontal=True,index=None) #,on_change=change_phone_service
         MultipleLines = st.radio("MultipleLines",['Yes', 'No','No Phone Service'],horizontal=True,index=None)
         InternetService = st.radio("Internet Service",['Yes', 'No'],horizontal=True,index=None)
