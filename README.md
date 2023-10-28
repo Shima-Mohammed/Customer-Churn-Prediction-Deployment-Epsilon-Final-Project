@@ -1,6 +1,6 @@
 
 # Telecom Customer Churn Prediction Deployment
-This project aims to deploy the machine learning model I developed based on Kaggle data
+This project aims to deploy the machine learning model ,I developed based on Kaggle data, by using streamlit framework .
 
 
 
